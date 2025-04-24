@@ -1,0 +1,89 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Cliente {
+  id_cliente int [pk, increment] 
+  nombre varchar(100)
+  apellido varchar(100)
+  direccion text
+  telefono varchar(20)
+  email varchar(100)
+}
+
+Table Reserva {
+  id_reserva int [pk, increment] 
+  fecha_reserva date
+  estado varchar(50)
+  id_cliente int [ref: > Cliente.id_cliente] 
+  id_paquete int [ref: > Paquete.id_paquete]   
+}
+
+Table Paquete {
+  id_paquete int [pk, increment] 
+  nombre_paquete varchar(100)
+  descripcion text
+  precio decimal(10,2)
+  id_destino int [ref: > Destino.id_destino]       
+  id_vuelo int [ref: > Vuelo.id_vuelo]             
+  id_hotel int [ref: > Hotel.id_hotel]             
+  id_excursion int [ref: > Excursion.id_excursion] 
+  id_transporte int [ref: > Transporte.id_transporte] 
+  id_seguro int [ref: > Seguro.id_seguro]           
+  id_itinerario int [ref: > Itinerario.id_itinerario] 
+}
+
+Table Destino {
+  id_destino int [pk, increment] 
+  nombre varchar(100)
+  ciudad varchar(100)
+  pais varchar(100)
+  descripcion text
+}
+
+Table Vuelo {
+  id_vuelo int [pk, increment] 
+  aerolinea varchar(100)
+  numero_vuelo varchar(20)
+  aeropuerto_origen varchar(100)
+  aeropuerto_destino varchar(100)
+  fecha_hora_salida datetime
+  fecha_hora_llegada datetime
+}
+
+Table Hotel {
+  id_hotel int [pk, increment] 
+  nombre varchar(100)
+  direccion text
+  numero_estrellas int
+  telefono varchar(20)
+}
+
+Table Excursion {
+  id_excursion int [pk, increment] 
+  nombre varchar(100)
+  descripcion text
+  duracion int 
+  actividades_incluidas text
+}
+
+Table Transporte {
+  id_transporte int [pk, increment] 
+  tipo varchar(50) 
+  empresa varchar(100)
+  horario_salida datetime
+  horario_llegada datetime
+}
+
+Table Seguro {
+  id_seguro int [pk, increment] 
+  proveedor varchar(100)
+  tipo_seguro varchar(50)
+  cobertura text
+  vigencia varchar(50)
+}
+
+Table Itinerario {
+  id_itinerario int [pk, increment] 
+  descripcion_dias text
+  actividades_programadas text
+}
